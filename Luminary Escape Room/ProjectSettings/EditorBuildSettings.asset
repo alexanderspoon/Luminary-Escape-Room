@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/_/Jacob Testing Scene.unity
     guid: 13a97756c8cabb24e8bd76effbe7cd72
+  - enabled: 1
+    path: Assets/_/Left Wall (Blue)/Left Wall.unity
+    guid: a0c008e46e736614f94f01b1e2dfa4a4
   m_configObjects: {}
