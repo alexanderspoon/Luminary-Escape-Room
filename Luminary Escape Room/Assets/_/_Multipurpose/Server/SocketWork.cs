@@ -24,7 +24,7 @@ public class SocketWork : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
-        ws = new WebSocket("ws://192.168.50.94:3000");
+        ws = new WebSocket("ws://10.31.11.138:3000");
         ws.Connect();
         ws.OnMessage += (sender, e) =>
         {
