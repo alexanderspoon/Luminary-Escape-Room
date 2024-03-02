@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08e42012a886ab4d9c7fec1a1b5002d, type: 3}
   m_Name: test3
   m_EditorClassIdentifier: 
-  cooldown: 0
   item_type: 2
-  item_sprite: {fileID: 21300000, guid: 13f17c1da18a9114daf04b761f2fa54e, type: 3}
+  item_sprite: {fileID: 21300000, guid: 8c4ed5f7c8699fc4182a28d76703906e, type: 3}
+  id: 3
