@@ -1698,6 +1698,26 @@ PrefabInstance:
       propertyPath: m_PlaneDistance
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2822981167008732239, guid: 8386e050a8212704cac12e3d0f29dd85, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822981167008732239, guid: 8386e050a8212704cac12e3d0f29dd85, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822981167008732239, guid: 8386e050a8212704cac12e3d0f29dd85, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822981167008732239, guid: 8386e050a8212704cac12e3d0f29dd85, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822981167008732239, guid: 8386e050a8212704cac12e3d0f29dd85, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 37
+      objectReference: {fileID: 0}
     - target: {fileID: 3109339786252923819, guid: 8386e050a8212704cac12e3d0f29dd85, type: 3}
       propertyPath: server
       value: 
