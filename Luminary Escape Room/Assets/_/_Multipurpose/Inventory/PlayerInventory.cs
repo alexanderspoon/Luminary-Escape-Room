@@ -13,7 +13,6 @@ public class PlayerInventory : MonoBehaviour
     [Header("General")]
 
     public List<itemType> inventoryList;
-    public List<ItemScriptableObject> inventoryInfoList;
     public int selectedItem;
 
     [Space(20)]
@@ -31,8 +30,6 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] Sprite emptySlotSprite;
 
     [SerializeField] private Camera mainCamera;
-    [SerializeField] SocketWork server;
-    [SerializeField] GameObject[] itemList;
 
     private Dictionary<itemType, GameObject> itemSetActive = new Dictionary<itemType, GameObject>() { };
 
@@ -66,27 +63,14 @@ public class PlayerInventory : MonoBehaviour
             if (Physics.Raycast(ray, out hitInfo))
             {
                 IPickable item = hitInfo.collider.GetComponent<IPickable>();
-                ItemPickable itemInfo = hitInfo.collider.GetComponent<ItemPickable>();
                 if (item != null)
                 {
-                    inventoryList.Add(itemInfo.itemScriptableObject.item_type);
-                    server.addItem(itemInfo.itemScriptableObject.id);
-                    
+                    inventoryList.Add(hitInfo.collider.GetComponent<ItemPickable>().itemScriptableObject.item_type);
                     item.PickItem();
                     UpdateInventoryUI();
                 }
             }
         }
-    }
-
-
-    ItemPickable FindItem(int id){
-        for(int x = 0; x<itemList.Length; x++){
-            if(itemList[x].GetComponent<ItemPickable>().itemScriptableObject.id==id){
-                return itemList[x].GetComponent<ItemPickable>();
-            }
-        }
-        return null;
     }
 
     public void SlotClicked()
@@ -97,7 +81,6 @@ public class PlayerInventory : MonoBehaviour
 
     public void UpdateInventoryUI()
     {
-        //.Log("inv"+inventoryList.Count);
         for (int i = 0; i < itemSprites.Count; i++)
         {
             if (i < inventoryList.Count)
@@ -129,46 +112,7 @@ public class PlayerInventory : MonoBehaviour
             }
         }
     }
-
-        public void UpdateInventoryUI(string[] items)
-    {
-        //.Log("inv"+inventoryList.Count);
-        for (int i = 0; i < items.Length; i++)
-        {
-            Debug.Log("test");
-            if (i < items.Length)
-            {
-                Debug.Log("got inside"+items.Length);
-                itemSprites[i].sprite = FindItem(int.Parse(items[i])).itemScriptableObject.item_sprite;
-                itemSprites[i].enabled = true;
-            }
-            else
-            {
-                itemSprites[i].sprite = emptySlotSprite;
-                itemSprites[i].enabled = false;
-            }
-        }
-
-        if (inventoryList.Count > 0)
-        {
-            int a = 0;
-            foreach (Image image in itemSelectedIndicators)
-            {
-                if (a == selectedItem)
-                {
-                    image.gameObject.SetActive(true);
-                }
-                else
-                {
-                    image.gameObject.SetActive(false);
-                }
-                a++;
-            }
-        }
-    }
 }
-
-
 
 public interface IPickable
 {

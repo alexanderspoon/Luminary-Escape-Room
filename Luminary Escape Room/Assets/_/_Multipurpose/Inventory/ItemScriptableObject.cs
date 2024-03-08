@@ -12,7 +12,6 @@ public class ItemScriptableObject : ScriptableObject
 {
     public itemType item_type;
     public Sprite item_sprite;
-    public int id;
 }
 
 public enum itemType { test1, test2, test3}
