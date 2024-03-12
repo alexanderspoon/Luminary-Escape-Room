@@ -14,6 +14,7 @@ public class PlayerInventory : MonoBehaviour
 
     public List<itemType> inventoryList;
     public List<ItemScriptableObject> inventoryInfoList;
+    public List<GameObject> allItems;
     public int selectedItem;
 
     [Space(20)]
@@ -38,9 +39,11 @@ public class PlayerInventory : MonoBehaviour
 
     void Awake()
     {
-        itemSetActive.Add(itemType.test1, test_1);
-        itemSetActive.Add(itemType.test2, test_2);
-        itemSetActive.Add(itemType.test3, test_3);
+
+        for(int x = 0; x<allItems.Count; x++){
+            itemSetActive.Add(allItems[x].GetComponentInChildren<ItemPickable>().itemScriptableObject.item_type, allItems[x]);
+        }
+        
 
         //grabs the inventory images without having to drag them into the inspector, scalable
         foreach (Transform child in itemSpritesParent.transform)
@@ -70,7 +73,7 @@ public class PlayerInventory : MonoBehaviour
                 if (item != null)
                 {
                     inventoryList.Add(itemInfo.itemScriptableObject.item_type);
-                    server.addItem(itemInfo.itemScriptableObject.id);
+                   // server.addItem(itemInfo.itemScriptableObject.id);
                     
                     item.PickItem();
                     UpdateInventoryUI();
@@ -102,7 +105,7 @@ public class PlayerInventory : MonoBehaviour
         {
             if (i < inventoryList.Count)
             {
-                itemSprites[i].sprite = itemSetActive[inventoryList[i]].GetComponent<ItemPickable>().itemScriptableObject.item_sprite;
+                itemSprites[i].sprite = itemSetActive[inventoryList[i]].GetComponentInChildren<ItemPickable>().itemScriptableObject.item_sprite;
                 itemSprites[i].enabled = true;
             }
             else

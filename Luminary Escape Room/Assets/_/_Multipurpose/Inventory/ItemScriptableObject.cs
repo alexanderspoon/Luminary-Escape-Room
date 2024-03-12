@@ -15,4 +15,4 @@ public class ItemScriptableObject : ScriptableObject
     public int id;
 }
 
-public enum itemType { test1, test2, test3}
+public enum itemType {Vinegar,Key}
