@@ -6,7 +6,7 @@ using UnityEngine;
 //https://www.youtube.com/watch?v=HGol5qhqjOE&ab_channel=FreedomCoding
 //https://www.youtube.com/watch?v=Josw0x2geuQ&ab_channel=FreedomCoding
 
-[CreateAssetMenu(fileName = "Item", menuName = "Scriptable Objects/Item")]
+[CreateAssetMenu(fileName = "Items", menuName = "Scriptable Objects/Item")]
 
 public class ItemScriptableObject : ScriptableObject
 {
@@ -15,4 +15,4 @@ public class ItemScriptableObject : ScriptableObject
     public int id;
 }
 
-public enum itemType {Vinegar,Key}
+public enum itemType {Vinegar,Key,FireScroll,TimeScroll,FruitJar,CopperPowder,PhoenixAsh}

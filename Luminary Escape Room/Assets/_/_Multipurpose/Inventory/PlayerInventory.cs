@@ -14,14 +14,8 @@ public class PlayerInventory : MonoBehaviour
 
     public List<itemType> inventoryList;
     public List<ItemScriptableObject> inventoryInfoList;
-    public List<GameObject> allItems;
+    public List<GameObject> allItems; //item prefabs go in here
     public int selectedItem;
-
-    [Space(20)]
-    [Header("Item Prefabs")]
-    public GameObject test_1;
-    public GameObject test_2;
-    public GameObject test_3;
 
     [Space(20)]
     [Header("UI")]
@@ -39,8 +33,7 @@ public class PlayerInventory : MonoBehaviour
 
     void Awake()
     {
-
-        for(int x = 0; x<allItems.Count; x++){
+        for (int x = 0; x<allItems.Count; x++){
             itemSetActive.Add(allItems[x].GetComponentInChildren<ItemPickable>().itemScriptableObject.item_type, allItems[x]);
         }
         
