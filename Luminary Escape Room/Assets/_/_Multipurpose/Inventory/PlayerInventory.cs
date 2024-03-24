@@ -16,6 +16,9 @@ public class PlayerInventory : MonoBehaviour
     public List<ItemScriptableObject> inventoryInfoList;
     public List<GameObject> allItems; //item prefabs go in here
     public int selectedItem;
+    public GameObject currentItem;
+    public string currentItemName;
+    public string lastItemName;
 
     [Space(20)]
     [Header("UI")]
@@ -61,34 +64,67 @@ public class PlayerInventory : MonoBehaviour
             //add object to inventory if it has the ItemPickable script component and it will be destroyed
             if (Physics.Raycast(ray, out hitInfo))
             {
-                IPickable item = hitInfo.collider.GetComponent<IPickable>();
-                ItemPickable itemInfo = hitInfo.collider.GetComponent<ItemPickable>();
-                if (item != null)
+                if(hitInfo.collider.GetComponent<ItemPickable>() != null)
                 {
-                    inventoryList.Add(itemInfo.itemScriptableObject.item_type);
-                   // server.addItem(itemInfo.itemScriptableObject.id);
-                    
-                    item.PickItem();
-                    UpdateInventoryUI();
+                    IPickable item = hitInfo.collider.GetComponent<IPickable>();
+                    ItemPickable itemInfo = hitInfo.collider.GetComponent<ItemPickable>();
+                    if (item != null)
+                    {
+                        inventoryList.Add(itemInfo.itemScriptableObject.item_type);
+                        // server.addItem(itemInfo.itemScriptableObject.id);
+
+                        item.PickItem();
+                        UpdateInventoryUI();
+                    }
+                }
+                if(hitInfo.collider.GetComponent<WorldItem>() != null)
+                {
+                    WorldItemInteractions(hitInfo.collider.GetComponent<WorldItem>().itemName);
                 }
             }
         }
     }
 
-
-    ItemPickable FindItem(int id){
-        for(int x = 0; x<itemList.Length; x++){
-            if(itemList[x].GetComponent<ItemPickable>().itemScriptableObject.id==id){
-                return itemList[x].GetComponent<ItemPickable>();
-            }
+    void WorldItemInteractions(string worldItemName)
+    {
+        if(currentItemName == "Key" && worldItemName == "Chest")
+        {
+            Debug.Log("item interaction");
         }
-        return null;
+        if(currentItemName == "Fruit" && worldItemName == "Mortar")
+        {
+            Debug.Log("item interaction");
+        }
+    }
+
+    void CombineItems()
+    {
+        if (currentItemName == "Key" && lastItemName == "Time" || currentItemName == "Time" && lastItemName == "Key")
+        {
+            Debug.Log("item combine");
+        }
     }
 
     public void SlotClicked()
     {
+        lastItemName = currentItemName;
         selectedItem = int.Parse(EventSystem.current.currentSelectedGameObject.name);
         UpdateInventoryUI();
+        currentItem = EventSystem.current.currentSelectedGameObject;
+        currentItemName = currentItem.GetComponent<Image>().sprite.name;
+        CombineItems();
+    }
+
+    ItemPickable FindItem(int id)
+    {
+        for (int x = 0; x < itemList.Length; x++)
+        {
+            if (itemList[x].GetComponent<ItemPickable>().itemScriptableObject.id == id)
+            {
+                return itemList[x].GetComponent<ItemPickable>();
+            }
+        }
+        return null;
     }
 
     public void UpdateInventoryUI()
