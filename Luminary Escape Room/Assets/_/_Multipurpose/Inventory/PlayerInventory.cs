@@ -17,8 +17,19 @@ public class PlayerInventory : MonoBehaviour
     public List<GameObject> allItems; //item prefabs go in here
     public int selectedItem;
     public GameObject currentItem;
+    public GameObject lastItem;
     public string currentItemName;
     public string lastItemName;
+
+    public GameObject powder;
+    public Transform powderSpawn;
+    public bool phoenixDead;
+    public GameObject phoenixAsh;
+    public Transform spawnAsh;
+    public bool makeAlcohol;
+    public bool makeCrystals;
+
+    public Sprite mash, fermentedMash, emptyJar, alcohol, vinegarSolution, evaporatedSolution, mixedSolution, emptyBottle, crystals;
 
     [Space(20)]
     [Header("UI")]
@@ -36,6 +47,10 @@ public class PlayerInventory : MonoBehaviour
 
     void Awake()
     {
+        phoenixDead = false;
+        makeAlcohol = false;
+        makeCrystals = false;
+
         for (int x = 0; x<allItems.Count; x++){
             itemSetActive.Add(allItems[x].GetComponentInChildren<ItemPickable>().itemScriptableObject.item_type, allItems[x]);
         }
@@ -85,31 +100,160 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+    //i couldn't think of a better way so i brute forced it
     void WorldItemInteractions(string worldItemName)
     {
-        if(currentItemName == "Key" && worldItemName == "Chest")
+        //Blue Wall interactions
+        if (currentItemName == "Fruit" && worldItemName == "Mortar")
         {
-            Debug.Log("item interaction");
+            Debug.Log("mash");
+            currentItem.GetComponent<Image>().sprite = mash;
         }
-        if(currentItemName == "Fruit" && worldItemName == "Mortar")
+        if (currentItemName == "Fermented Mash" && worldItemName == "Distillery")
         {
-            Debug.Log("item interaction");
+            Debug.Log("jar");
+            currentItem.GetComponent<Image>().sprite = emptyJar;
+            makeAlcohol = true;
+            makeCrystals = false;
+        }
+        if (currentItemName == "Mixed Solution" && worldItemName == "Distillery")
+        {
+            Debug.Log("bottle");
+            currentItem.GetComponent<Image>().sprite = emptyBottle;
+            makeCrystals = true;
+            makeAlcohol = false;
+        }
+        if (currentItemName == "Fire" && worldItemName == "Distillery")
+        {
+            Debug.Log("heat distillery");
+            if(makeAlcohol == true)
+            {
+                Debug.Log("alcohol");
+                foreach (Transform child in itemSpritesParent.transform)
+                {
+                    if (child.GetComponent<Image>().sprite == emptyJar)
+                    {
+                        child.GetComponent<Image>().sprite = alcohol;
+                    }
+                }
+                makeAlcohol = false;
+            }
+            else if (makeCrystals == true)
+            {
+                Debug.Log("crystals");
+                foreach (Transform child in itemSpritesParent.transform)
+                {
+                    if (child.GetComponent<Image>().sprite == emptyBottle)
+                    {
+                        child.GetComponent<Image>().sprite = crystals;
+                    }
+                }
+                makeCrystals = false;
+            }
+        }
+        if (currentItemName == "Alcohol" && worldItemName == "Blue")
+        {
+            Debug.Log("blue flame lighting");
+            //code for lighting flame
+        }
+
+
+        //Green Wall interactions
+        if (currentItemName == "Key" && worldItemName == "Chest")
+        {
+            Debug.Log("powder falls on ground");
+            selectedItem = 0;
+            currentItem.gameObject.SetActive(false);
+            Instantiate(powder, powderSpawn);
+        }
+        if (currentItemName == "Crystals" && worldItemName == "Green")
+        {
+            Debug.Log("green flame lighting");
+            //code for lighting flame
         }
     }
 
     void CombineItems()
     {
-        if (currentItemName == "Key" && lastItemName == "Time" || currentItemName == "Time" && lastItemName == "Key")
+        //Blue Wall combinations
+        if (currentItemName == "Mash" && lastItemName == "Time" || currentItemName == "Time" && lastItemName == "Mash")
         {
-            Debug.Log("item combine");
+            Debug.Log("fermented mash");
+            SpawnPhoenixAsh();
+            if (currentItemName == "Mash")
+            {
+                currentItem.GetComponent<Image>().sprite = fermentedMash;
+            }
+            else if (currentItemName == "Time")
+            {
+                lastItem.GetComponent<Image>().sprite = fermentedMash;
+            }
+        }
+
+        //Green Wall combinations
+        if (currentItemName == "Vinegar" && lastItemName == "Powder" || currentItemName == "Powder" && lastItemName == "Vinegar")
+        {
+            Debug.Log("vinegar solution");
+            if(currentItemName == "Vinegar")
+            {
+                currentItem.GetComponent<Image>().sprite = vinegarSolution;
+                //destroy last item
+                lastItem.gameObject.SetActive(false);
+            }
+            else if (currentItemName == "Powder")
+            {
+                lastItem.GetComponent<Image>().sprite = vinegarSolution;
+                //destroy current item
+                currentItem.gameObject.SetActive(false);
+            }
+        }
+        if (currentItemName == "Vinegar Solution" && lastItemName == "Time" || currentItemName == "Time" && lastItemName == "Vinegar Solution")
+        {
+            Debug.Log("evaporated solution");
+            SpawnPhoenixAsh();
+            if (currentItemName == "Vinegar Solution")
+            {
+                currentItem.GetComponent<Image>().sprite = evaporatedSolution;
+            }
+            if (currentItemName == "Time")
+            {
+                lastItem.GetComponent<Image>().sprite = evaporatedSolution;
+            }
+        }
+        if (currentItemName == "Evaporated Solution" && lastItemName == "Ash" || currentItemName == "Ash" && lastItemName == "Evaporated Solution")
+        {
+            Debug.Log("mixed solution");
+            if (currentItemName == "Evaporated Solution")
+            {
+                currentItem.GetComponent<Image>().sprite = mixedSolution;
+                //destroy last item
+                lastItem.gameObject.SetActive(false);
+            }
+            if (currentItemName == "Ash")
+            {
+                lastItem.GetComponent<Image>().sprite = mixedSolution;
+                //destroy current item
+                currentItem.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    void SpawnPhoenixAsh()
+    {
+        if (phoenixDead == false)
+        {
+            phoenixDead = true;
+            Instantiate(phoenixAsh, spawnAsh);
         }
     }
 
     public void SlotClicked()
     {
+        lastItem = currentItem;
         lastItemName = currentItemName;
         selectedItem = int.Parse(EventSystem.current.currentSelectedGameObject.name);
         UpdateInventoryUI();
+
         currentItem = EventSystem.current.currentSelectedGameObject;
         currentItemName = currentItem.GetComponent<Image>().sprite.name;
         CombineItems();
@@ -132,9 +276,13 @@ public class PlayerInventory : MonoBehaviour
         //.Log("inv"+inventoryList.Count);
         for (int i = 0; i < itemSprites.Count; i++)
         {
-            if (i < inventoryList.Count)
+            if (i < inventoryList.Count && itemSprites[i].sprite == null)
             {
                 itemSprites[i].sprite = itemSetActive[inventoryList[i]].GetComponentInChildren<ItemPickable>().itemScriptableObject.item_sprite;
+                itemSprites[i].enabled = true;
+            }
+            else if (i < inventoryList.Count && itemSprites[i].sprite != null)
+            {
                 itemSprites[i].enabled = true;
             }
             else
