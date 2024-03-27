@@ -8,6 +8,11 @@ public class Door : MonoBehaviour
     [SerializeField] private GameObject invisibleMaze;
     [SerializeField] private GameObject spellScroll;
 
+    private void Awake()
+    {
+        spellScroll.SetActive(false);
+    }
+
     void Update()
     {
         if (open == true)

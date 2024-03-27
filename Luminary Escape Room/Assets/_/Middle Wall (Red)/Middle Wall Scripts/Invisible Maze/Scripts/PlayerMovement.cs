@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
         {
             mousePos = Input.mousePosition;
             mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+            Debug.Log(mousePos);
             mouseDir = mousePos - gameObject.transform.position;
             mouseDir = new Vector3(mouseDir.x, mouseDir.y, 0);
             mouseDir = mouseDir.normalized;
