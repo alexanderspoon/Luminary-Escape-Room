@@ -24,7 +24,7 @@ public class SocketWork : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
-        ws = new WebSocket("ws://10.31.11.138:3000");
+        ws = new WebSocket("ws://10.255.243.246:3000");
         ws.Connect();
         ws.OnMessage += (sender, e) =>
         {
@@ -72,6 +72,13 @@ public class SocketWork : MonoBehaviour
                     
 
                     break;
+
+                case "intro":
+                SocketWork.Enqueue(() => {
+                    Debug.Log("GotIntroRequest");
+                });
+                break;
+
                 default:
                     break;
             }
@@ -86,6 +93,10 @@ public class SocketWork : MonoBehaviour
         ws.Send("{\"type\":\"add\",\"added\":\""+id+"\"}");
     }
 
+    public void StartIntro() 
+    {
+        ws.Send("{\"type\":\"intro\"}");
+    }
 
 
         public static void Enqueue(Action action)
