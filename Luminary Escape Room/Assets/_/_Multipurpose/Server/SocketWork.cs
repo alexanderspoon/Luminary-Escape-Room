@@ -97,6 +97,12 @@ public class SocketWork : MonoBehaviour
                     
 
                     break;
+                case "intro":
+                SocketWork.Enqueue(() => {
+                    Debug.Log("GotIntroRequest");
+                });
+                break;
+
                 default:
                     break;
             }
@@ -128,6 +134,10 @@ public class SocketWork : MonoBehaviour
         ws.Send("{\"type\":\"green\",\"added\":\"0\"}");
     }
 
+    public void StartIntro() 
+    {
+        ws.Send("{\"type\":\"intro\"}");
+    }
 
 
         public static void Enqueue(Action action)
