@@ -11,6 +11,9 @@ public class SocketWork : MonoBehaviour
     string number;
 
         private static SocketWork instance;
+        private static SocketWork inventoryQueue;
+
+    public GameObject winCanvas;
 
     private readonly Queue<Action> actionQueue = new Queue<Action>();
 
@@ -24,7 +27,8 @@ public class SocketWork : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
-        ws = new WebSocket("ws://10.255.243.246:3000");
+        ws = new WebSocket("ws://192.168.133.1:3000");
+        
         ws.Connect();
         ws.OnMessage += (sender, e) =>
         {
@@ -73,6 +77,26 @@ public class SocketWork : MonoBehaviour
 
                     break;
 
+                case "kill":
+                        Debug.Log("kill phoenix");
+                                        SocketWork.Enqueue(() => {
+                            // Enable or modify TextMeshProUGUI here
+                             inventory.SpawnPhoenixAsh();
+                        });
+                 
+                    
+
+                    break;
+
+                case "win":
+                                        SocketWork.Enqueue(() => {
+                            // Enable or modify TextMeshProUGUI here
+                             winCanvas.SetActive(true);
+                        });
+                 
+                    
+
+                    break;
                 case "intro":
                 SocketWork.Enqueue(() => {
                     Debug.Log("GotIntroRequest");
@@ -90,7 +114,24 @@ public class SocketWork : MonoBehaviour
     }
 
     public void addItem(int id){
+        
         ws.Send("{\"type\":\"add\",\"added\":\""+id+"\"}");
+    }
+
+        public void killPhoenix(){
+            Debug.Log("kill phoenix");
+        ws.Send("{\"type\":\"kill\",\"added\":\"0\"}");
+    }
+
+    public void removeItem(int id){
+        ws.Send("{\"type\":\"remove\",\"added\":\""+id+"\"}");
+    }
+
+    public void winBlue(){
+        ws.Send("{\"type\":\"blue\",\"added\":\"0\"}");
+    }
+    public void winGreen(){
+        ws.Send("{\"type\":\"green\",\"added\":\"0\"}");
     }
 
     public void StartIntro() 
