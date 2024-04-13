@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8711509034678352990}
+  - component: {fileID: 2179496461835747454}
   m_Layer: 0
   m_Name: Copper Powder
   m_TagString: Untagged
@@ -32,6 +33,19 @@ Transform:
   - {fileID: 5368371082764492046}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2179496461835747454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710534457528382402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c2265d11f8ce8041826eccf548f61eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemScriptableObject: {fileID: 11400000, guid: 17e2582ba335016419462d69a9ba79d5, type: 2}
 --- !u!1001 &5551513871360293605
 PrefabInstance:
   m_ObjectHideFlags: 0

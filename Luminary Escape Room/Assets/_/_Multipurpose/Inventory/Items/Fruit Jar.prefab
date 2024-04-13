@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7929624069618891539}
+  - component: {fileID: 6980822036234426835}
   m_Layer: 0
   m_Name: Fruit Jar
   m_TagString: Untagged
@@ -32,6 +33,19 @@ Transform:
   - {fileID: 6027083211660292975}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6980822036234426835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3332462483988470693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c2265d11f8ce8041826eccf548f61eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemScriptableObject: {fileID: 11400000, guid: b3fa5fe018c7ef2489a853f9926b22c6, type: 2}
 --- !u!1001 &6065848707906409604
 PrefabInstance:
   m_ObjectHideFlags: 0

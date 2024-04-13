@@ -76,6 +76,7 @@ public class PlayerInventory : MonoBehaviour
         instance=this;
 
         for (int x = 0; x<allItems.Count; x++){
+            Debug.Log(allItems[x].name);
             Debug.Log(allItems[x].GetComponentInChildren<ItemPickable>().itemScriptableObject.item_type);
             Debug.Log(allItems[x].name);
             itemSetActive.Add(allItems[x].GetComponentInChildren<ItemPickable>().itemScriptableObject.item_type, allItems[x]);
