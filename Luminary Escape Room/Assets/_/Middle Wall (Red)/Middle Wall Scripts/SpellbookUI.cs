@@ -6,10 +6,12 @@ public class SpellbookUI : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
     [SerializeField] private GameObject spellbookCanvas;
+    [SerializeField] private GameObject openBook;
 
     private void Awake()
     {
         spellbookCanvas.SetActive(false);
+        openBook.SetActive(false);
     }
 
     // Update is called once per frame
@@ -26,6 +28,7 @@ public class SpellbookUI : MonoBehaviour
                 if(hitInfo.collider.GetComponent<SpellbookUI>()  != null)
                 {
                     spellbookCanvas.SetActive(true);
+                    openBook.SetActive(true);
                 }
             }
         }
@@ -34,5 +37,6 @@ public class SpellbookUI : MonoBehaviour
     public void DismissButton()
     {
         spellbookCanvas.SetActive(false);
+        openBook.SetActive(false);
     }
 }

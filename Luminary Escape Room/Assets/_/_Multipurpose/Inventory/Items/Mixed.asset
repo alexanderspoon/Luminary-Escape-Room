@@ -15,3 +15,4 @@ MonoBehaviour:
   item_type: 14
   item_sprite: {fileID: 21300000, guid: 143cb624a94339f48a8a8d1be962eb21, type: 3}
   id: 14
+  item_description: mixed solution item description
