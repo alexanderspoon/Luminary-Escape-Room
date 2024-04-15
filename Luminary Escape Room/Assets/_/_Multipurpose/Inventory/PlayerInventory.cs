@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -32,8 +33,13 @@ public class PlayerInventory : MonoBehaviour
 
         private static PlayerInventory instance;
 
+    [Space(20)]
+    [Header("Item Info UI")]
+    [SerializeField] private RectTransform itemInfoUI;
+    [SerializeField] private TMP_Text itemNameText;
+    [SerializeField] private TMP_Text itemDescriptionText;
 
-    public Sprite mash, fermentedMash, emptyJar, alcohol, vinegarSolution, evaporatedSolution, mixedSolution, emptyBottle, crystals;
+    //public Sprite mash, fermentedMash, emptyJar, alcohol, vinegarSolution, evaporatedSolution, mixedSolution, emptyBottle, crystals;
 
     [Space(20)]
     [Header("UI")]
@@ -42,6 +48,8 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private List<Image> itemSprites; //list of item sprite children
     [SerializeField] private List<Image> itemSelectedIndicators; //list of selection indicator children
     [SerializeField] Sprite emptySlotSprite;
+
+    [Space(20)]
 
     [SerializeField] private Camera mainCamera;
     [SerializeField] SocketWork server;
@@ -70,6 +78,7 @@ public class PlayerInventory : MonoBehaviour
 
     void Awake()
     {
+        itemInfoUI.gameObject.SetActive(false);
         phoenixDead = false;
         makeAlcohol = false;
         makeCrystals = false;
@@ -270,6 +279,26 @@ public class PlayerInventory : MonoBehaviour
 
         currentItemName = currentItem.GetComponent<Image>().sprite.name;
         CombineItems();
+
+        //display item info
+        if(currentItem == lastItem)
+        {
+            itemInfoUI.gameObject.SetActive(true);
+            itemInfoUI.anchoredPosition = EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>().anchoredPosition;
+            itemNameText.text = currentItemName;
+            for (int x = 0; x < itemList.Length; x++)
+            {
+                if (itemList[x].GetComponentInChildren<ItemPickable>().itemScriptableObject.item_sprite.name == currentItemName)
+                {
+                    itemDescriptionText.text = itemList[x].GetComponentInChildren<ItemPickable>().itemScriptableObject.item_description;
+                }
+            }
+        }
+    }
+
+    public void CloseInfoButton()
+    {
+        itemInfoUI.gameObject.SetActive(false);
     }
 
     ItemPickable FindItem(int id)

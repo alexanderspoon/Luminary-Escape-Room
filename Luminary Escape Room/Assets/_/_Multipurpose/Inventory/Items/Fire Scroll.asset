@@ -15,3 +15,4 @@ MonoBehaviour:
   item_type: 2
   item_sprite: {fileID: 21300000, guid: 11d8ad75fa9ae0a499e87ce089c01046, type: 3}
   id: 2
+  item_description: fire scroll item description

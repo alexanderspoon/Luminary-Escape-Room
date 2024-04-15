@@ -15,3 +15,4 @@ MonoBehaviour:
   item_type: 7
   item_sprite: {fileID: 21300000, guid: 140fd296ff2e3ca41a6f18b72735b506, type: 3}
   id: 7
+  item_description: vinegar solution item description

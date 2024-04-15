@@ -15,3 +15,4 @@ MonoBehaviour:
   item_type: 15
   item_sprite: {fileID: 21300000, guid: 07008a7e528b9bf4588a8f921b0fd805, type: 3}
   id: 15
+  item_description: crystals item description
