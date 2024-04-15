@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HandlePotion.014
       objectReference: {fileID: 0}
+    - target: {fileID: 8215011372933879042, guid: e447aa106f247df458e072ec0f2449ba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8739874980050030520, guid: e447aa106f247df458e072ec0f2449ba, type: 3}
       propertyPath: m_LocalScale.x
       value: 4.2955613
@@ -315,6 +319,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LongPotion_1
       objectReference: {fileID: 0}
+    - target: {fileID: 7492211152876757120, guid: 4ebd47e5a47079141940be5854bc9ea0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7832462294960323130, guid: 4ebd47e5a47079141940be5854bc9ea0, type: 3}
       propertyPath: m_LocalScale.x
       value: 3.1621706
@@ -458,6 +466,10 @@ PrefabInstance:
     - target: {fileID: 6996940811732667081, guid: 340c7efc2075e814286647834c3d9bde, type: 3}
       propertyPath: m_Name
       value: HandlePotion.024
+      objectReference: {fileID: 0}
+    - target: {fileID: 6996940811732667081, guid: 340c7efc2075e814286647834c3d9bde, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7661168548729983091, guid: 340c7efc2075e814286647834c3d9bde, type: 3}
       propertyPath: m_LocalScale.x
@@ -981,6 +993,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HandlePotion.024
       objectReference: {fileID: 0}
+    - target: {fileID: 6996940811732667081, guid: 340c7efc2075e814286647834c3d9bde, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7661168548729983091, guid: 340c7efc2075e814286647834c3d9bde, type: 3}
       propertyPath: m_LocalScale.x
       value: 4.1378
@@ -1311,6 +1327,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Potion_14
       objectReference: {fileID: 0}
+    - target: {fileID: 7366954682194477841, guid: ef37f8b2fcc5f2b4db9000ef0a3aa86f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7887912828570048939, guid: ef37f8b2fcc5f2b4db9000ef0a3aa86f, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.6794
@@ -1437,6 +1457,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LongHandlePotion.008
       objectReference: {fileID: 0}
+    - target: {fileID: 2935242499255805099, guid: e578354a60f27c24ba6b086765a8fdd2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1458,6 +1482,10 @@ PrefabInstance:
     - target: {fileID: 4667795455171737255, guid: ae7643ef11b33c54d82046c802f559ee, type: 3}
       propertyPath: m_Name
       value: Potion_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667795455171737255, guid: ae7643ef11b33c54d82046c802f559ee, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5443875105870572573, guid: ae7643ef11b33c54d82046c802f559ee, type: 3}
       propertyPath: m_LocalScale.x
@@ -1584,6 +1612,10 @@ PrefabInstance:
     - target: {fileID: 9012067333886341645, guid: 6c61f7778683e0048a98befd2ac6c679, type: 3}
       propertyPath: m_Name
       value: LongPotion_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9012067333886341645, guid: 6c61f7778683e0048a98befd2ac6c679, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1795,6 +1827,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LongPotion_18
       objectReference: {fileID: 0}
+    - target: {fileID: 1930179021801902715, guid: 0a83d00c10e4195459dc04b6a89d2ac7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1988,6 +2024,10 @@ PrefabInstance:
     - target: {fileID: 8789286699563448560, guid: 4cc7771d476b46b47acab7069b9b0ded, type: 3}
       propertyPath: m_Name
       value: Potion_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8789286699563448560, guid: 4cc7771d476b46b47acab7069b9b0ded, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2454,6 +2494,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HandlePotion.012
       objectReference: {fileID: 0}
+    - target: {fileID: 4667762267172184599, guid: 0778feffdbad99241b124082dea58926, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5443982929639602349, guid: 0778feffdbad99241b124082dea58926, type: 3}
       propertyPath: m_LocalScale.x
       value: 3.1567
@@ -2527,6 +2571,10 @@ PrefabInstance:
     - target: {fileID: 1711986409397328920, guid: 60b2142a511f4b0408fe32d0a6ef5597, type: 3}
       propertyPath: m_Name
       value: LongPotion_25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711986409397328920, guid: 60b2142a511f4b0408fe32d0a6ef5597, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2056423457479771810, guid: 60b2142a511f4b0408fe32d0a6ef5597, type: 3}
       propertyPath: m_LocalScale.x
@@ -2791,6 +2839,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LongHandlePotion.011
       objectReference: {fileID: 0}
+    - target: {fileID: 7529130925807240394, guid: 8e05eda27f1eabb44999cb20b8f74fa7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2812,6 +2864,10 @@ PrefabInstance:
     - target: {fileID: 159480, guid: b3458b0334ca1b941b65c242203651e5, type: 3}
       propertyPath: m_Name
       value: ShelfV1
+      objectReference: {fileID: 0}
+    - target: {fileID: 159480, guid: b3458b0334ca1b941b65c242203651e5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 463882, guid: b3458b0334ca1b941b65c242203651e5, type: 3}
       propertyPath: m_LocalScale.x
@@ -2886,6 +2942,10 @@ PrefabInstance:
     - target: {fileID: 7078190838232842817, guid: 3a36c8cdede383445b8340bd20772a2c, type: 3}
       propertyPath: m_Name
       value: HandlePotion.016
+      objectReference: {fileID: 0}
+    - target: {fileID: 7078190838232842817, guid: 3a36c8cdede383445b8340bd20772a2c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7597882343205591291, guid: 3a36c8cdede383445b8340bd20772a2c, type: 3}
       propertyPath: m_LocalScale.x
@@ -3472,6 +3532,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HandlePotion.013
       objectReference: {fileID: 0}
+    - target: {fileID: 2192894554390681948, guid: 2576efb9203f9fa498ecafe26bc862fb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3746,6 +3810,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   number: 3
+  winCanvas: {fileID: 0}
   inventory: {fileID: 331348046}
 --- !u!4 &1645733399
 Transform:
@@ -3773,6 +3838,10 @@ PrefabInstance:
     - target: {fileID: 1403701878644770116, guid: a3ae5ee3e1376304d960a69f056fc8d5, type: 3}
       propertyPath: m_Name
       value: Potion_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1403701878644770116, guid: a3ae5ee3e1376304d960a69f056fc8d5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1743213870481924094, guid: a3ae5ee3e1376304d960a69f056fc8d5, type: 3}
       propertyPath: m_LocalScale.x
@@ -3899,6 +3968,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6ca896013d3a1724990a5089cdd2f86a, type: 3}
       propertyPath: m_Name
       value: TableHD
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6ca896013d3a1724990a5089cdd2f86a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4207,6 +4280,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LongPotion_3
       objectReference: {fileID: 0}
+    - target: {fileID: 3556379932875885239, guid: 89c1bd1051ecf1445b55f196615df899, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4184156419346747405, guid: 89c1bd1051ecf1445b55f196615df899, type: 3}
       propertyPath: m_LocalScale.x
       value: 3.1621706
@@ -4342,6 +4419,10 @@ PrefabInstance:
     - target: {fileID: 2771550402294527119, guid: e9fcfecfaad60c141a180a44523431a9, type: 3}
       propertyPath: m_Name
       value: HandlePotion.015
+      objectReference: {fileID: 0}
+    - target: {fileID: 2771550402294527119, guid: e9fcfecfaad60c141a180a44523431a9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3259857107505868341, guid: e9fcfecfaad60c141a180a44523431a9, type: 3}
       propertyPath: m_LocalScale.x
