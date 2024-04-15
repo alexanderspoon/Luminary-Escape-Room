@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class JigsawManager : MonoBehaviour
 {
+    public AudioSource gameSpeaker;
+
+
     public static int slotsFilled;
     [SerializeField] private GameObject frame;
     [SerializeField] private GameObject pieces;
@@ -14,6 +17,8 @@ public class JigsawManager : MonoBehaviour
         frame.SetActive(true);
         pieces.SetActive(true);
         scroll.SetActive(false);
+
+        gameSpeaker.Play();
     }
 
     void Update()
