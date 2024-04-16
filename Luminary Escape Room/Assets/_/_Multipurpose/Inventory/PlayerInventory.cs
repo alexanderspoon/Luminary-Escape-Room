@@ -145,30 +145,26 @@ public class PlayerInventory : MonoBehaviour
         //Blue Wall interactions
         if (currentItemName == "Fruit" && worldItemName == "Mortar")
         {
-        server.addItem(9);
-        server.removeItem(4);
-
-
-
- 
-            
-            
-
+            server.addItem(9);
+            server.removeItem(4);
+            currentItemName = null;
         }
         if (currentItemName == "Fermented" && worldItemName == "Distillery")
         {
-        server.addItem(11);
-        server.removeItem(10);
+            server.addItem(11);
+            server.removeItem(10);
             makeAlcohol = true;
             makeCrystals = false;
+            currentItemName = null;
         }
         if (currentItemName == "Mixed Solution" && worldItemName == "Distillery")
         {
             Debug.Log("bottle");
              server.addItem(11);
              server.removeItem(14);
-            makeCrystals = true;
-            makeAlcohol = false;
+             makeCrystals = true;
+             makeAlcohol = false;
+            currentItemName = null;
         }
         if (currentItemName == "Fire" && worldItemName == "Distillery")
         {
@@ -176,15 +172,17 @@ public class PlayerInventory : MonoBehaviour
             if(makeAlcohol == true)
             {
                 Debug.Log("alcohol");
-                        server.addItem(12);
-        server.removeItem(11);
+                server.addItem(12);
+                server.removeItem(11);
                 makeAlcohol = false;
+                currentItemName = null;
             }
             else if (makeCrystals == true)
             {
                 Debug.Log("crystals");
                 server.addItem(15);
                 makeCrystals = false;
+                currentItemName = null;
             }
         }
         if (currentItemName == "Alcohol" && worldItemName == "Blue")
@@ -201,8 +199,9 @@ public class PlayerInventory : MonoBehaviour
         if (currentItemName == "Key" && worldItemName == "Chest")
         {
             Debug.Log("powder falls on ground");
-            selectedItem = 0;
-            Instantiate(powder, powderSpawn);
+            currentItemName = null;
+            //Instantiate(powder, powderSpawn);
+            server.addItem(5);
             server.removeItem(1);
         }
         if (currentItemName == "Crystals" && worldItemName == "Green")
@@ -284,7 +283,7 @@ public class PlayerInventory : MonoBehaviour
         if(currentItem == lastItem)
         {
             itemInfoUI.gameObject.SetActive(true);
-            itemInfoUI.anchoredPosition = EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>().anchoredPosition;
+            //itemInfoUI.anchoredPosition = EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>().anchoredPosition;
             itemNameText.text = currentItemName;
             for (int x = 0; x < itemList.Length; x++)
             {
@@ -293,6 +292,10 @@ public class PlayerInventory : MonoBehaviour
                     itemDescriptionText.text = itemList[x].GetComponentInChildren<ItemPickable>().itemScriptableObject.item_description;
                 }
             }
+        }
+        else if (currentItem != lastItem)
+        {
+            itemInfoUI.gameObject.SetActive(false);
         }
     }
 
