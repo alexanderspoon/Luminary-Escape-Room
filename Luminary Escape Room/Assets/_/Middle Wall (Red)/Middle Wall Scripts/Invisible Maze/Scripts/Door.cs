@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
+    public AudioSource doorAudio;
+    public AudioClip witchIntro2;
+
     private bool open = false;
     [SerializeField] private GameObject invisibleMaze;
     [SerializeField] private GameObject spellScroll;
@@ -11,6 +14,8 @@ public class Door : MonoBehaviour
     private void Awake()
     {
         spellScroll.SetActive(false);
+
+        doorAudio.Play();
     }
 
     void Update()
@@ -19,6 +24,9 @@ public class Door : MonoBehaviour
         {
             spellScroll.SetActive(true);
             invisibleMaze.SetActive(false);
+
+            doorAudio.clip = witchIntro2;
+            doorAudio.Play();
         }
     }
 

@@ -18,7 +18,8 @@ public class JigsawManager : MonoBehaviour
         pieces.SetActive(true);
         scroll.SetActive(false);
 
-        gameSpeaker.Play();
+        //play witch intro
+        //gameSpeaker.Play();
     }
 
     void Update()
