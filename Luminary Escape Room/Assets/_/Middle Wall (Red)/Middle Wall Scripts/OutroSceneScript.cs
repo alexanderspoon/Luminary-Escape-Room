@@ -16,14 +16,14 @@ public class OutroSceneScript : MonoBehaviour
     {
         credits.SetActive(false);
         server = FindObjectOfType<SocketWork>();
-        /*if (server.green == true && server.blue == true)
+        if (server.green == true && server.blue == true)
         {
             StartCoroutine(playWinAudio());
         }
         else
         {
             StartCoroutine(playLoseAudio());
-        }*/
+        }
 
     }
     private IEnumerator playWinAudio()
