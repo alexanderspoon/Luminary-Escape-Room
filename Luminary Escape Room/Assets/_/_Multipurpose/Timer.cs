@@ -2,22 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
     [SerializeField] private float timeRemaining;
     [SerializeField] private GameObject timerText;
-    [SerializeField] private GameObject gameOverImage;
+    //[SerializeField] private GameObject gameOverImage;
     [SerializeField] private bool timerActive;
+
+    [SerializeField] private SocketWork server;
 
     private void Awake()
     {
+        server = FindObjectOfType<SocketWork>();
         timerActive = true;
-        gameOverImage.SetActive(false);
     }
 
     void Update()
     {
+        if(server.green == true && server.blue == true)
+        {
+            timerEnded();
+        }
+
         if (timerActive)
         {
             if (timeRemaining >= 0)
@@ -36,7 +44,8 @@ public class Timer : MonoBehaviour
 
     void timerEnded()
     {
-        gameOverImage.SetActive(true);
+        SceneManager.LoadScene("Outro Scene");
+        //gameOverImage.SetActive(true);
     }
 
     void DisplayTime(float timeToDisplay)

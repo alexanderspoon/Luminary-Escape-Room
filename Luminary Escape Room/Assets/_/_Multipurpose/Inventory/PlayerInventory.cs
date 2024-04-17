@@ -139,7 +139,7 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    //i couldn't think of a better way so i brute forced it
+    
     void WorldItemInteractions(string worldItemName)
     {
         //Blue Wall interactions
