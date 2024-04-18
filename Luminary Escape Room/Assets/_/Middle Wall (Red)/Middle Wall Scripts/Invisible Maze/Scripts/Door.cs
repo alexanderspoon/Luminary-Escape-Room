@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
+
+    //audio var
+    public AudioSource middleScreenAudio;
+    public AudioClip timeScroll;
+
     private bool open = false;
     [SerializeField] private GameObject invisibleMaze;
     [SerializeField] private GameObject spellScroll;
@@ -19,6 +24,10 @@ public class Door : MonoBehaviour
         {
             spellScroll.SetActive(true);
             invisibleMaze.SetActive(false);
+
+            //audio time scroll trigger
+            middleScreenAudio.clip = timeScroll;
+            middleScreenAudio.Play();
         }
     }
 

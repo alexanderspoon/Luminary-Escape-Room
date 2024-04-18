@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PieceScript : MonoBehaviour
 {
+    //Audio var
+    public AudioSource middleScreenAudio;
+    public AudioClip grabSound;
+    public AudioClip successNoise;
+
     public string pieceIdentifier;
     public string objectName;
     public string destinationName;
@@ -53,6 +58,11 @@ public class PieceScript : MonoBehaviour
                 {
                     // Select the cube
                     selectedCube = hitObject;
+
+                    //trigger grab audio
+                    middleScreenAudio.clip = grabSound;
+                    middleScreenAudio.Play();
+
                 }
                 else if (hitObject.CompareTag(destinationName))
                 {
@@ -65,6 +75,10 @@ public class PieceScript : MonoBehaviour
                         //Count the section of the puzzle as completed
                         JigsawManager.slotsFilled++;
                         Debug.Log("Puzzle Completion: " + JigsawManager.slotsFilled + "/9");
+
+                        //trigger success noise
+                        middleScreenAudio.clip = successNoise;
+                        middleScreenAudio.Play();
 
                         // Start moving the cube towards the sphere
                         isMoving = true;

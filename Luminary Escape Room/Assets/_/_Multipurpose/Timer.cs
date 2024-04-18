@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
+    //Audio Var
+    public AudioSource musicAudioSource;
+    public AudioClip musicClip;
+    
     [SerializeField] private float timeRemaining;
     [SerializeField] private GameObject timerText;
     [SerializeField] private GameObject gameOverImage;
@@ -24,6 +28,10 @@ public class Timer : MonoBehaviour
             {
                 timeRemaining -= Time.deltaTime;
                 DisplayTime(timeRemaining);
+
+                //start music audio
+                musicAudioSource.clip = musicClip;
+                musicAudioSource.Play();
             }
             else
             {
