@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -29,7 +31,15 @@ public class PlayerInventory : MonoBehaviour
     public bool makeAlcohol;
     public bool makeCrystals;
 
-    public Sprite mash, fermentedMash, emptyJar, alcohol, vinegarSolution, evaporatedSolution, mixedSolution, emptyBottle, crystals;
+        private static PlayerInventory instance;
+
+    [Space(20)]
+    [Header("Item Info UI")]
+    [SerializeField] private RectTransform itemInfoUI;
+    [SerializeField] private TMP_Text itemNameText;
+    [SerializeField] private TMP_Text itemDescriptionText;
+
+    //public Sprite mash, fermentedMash, emptyJar, alcohol, vinegarSolution, evaporatedSolution, mixedSolution, emptyBottle, crystals;
 
     [Space(20)]
     [Header("UI")]
@@ -39,19 +49,45 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private List<Image> itemSelectedIndicators; //list of selection indicator children
     [SerializeField] Sprite emptySlotSprite;
 
+    [Space(20)]
+
     [SerializeField] private Camera mainCamera;
     [SerializeField] SocketWork server;
     [SerializeField] GameObject[] itemList;
 
+    public GameObject fire;
+    public GameObject rightFire;
+
+    public Material blue;
+    public Material green;
+
+    float updatedCount = 0;
+    
     private Dictionary<itemType, GameObject> itemSetActive = new Dictionary<itemType, GameObject>() { };
+
+    private readonly Queue<Action> actionQueue = new Queue<Action>();
+
+
+    public static void Enqueue(Action action)
+    {
+        lock (instance.actionQueue)
+        {
+            instance.actionQueue.Enqueue(action);
+        }
+    }
 
     void Awake()
     {
+        itemInfoUI.gameObject.SetActive(false);
         phoenixDead = false;
         makeAlcohol = false;
         makeCrystals = false;
+        instance=this;
 
         for (int x = 0; x<allItems.Count; x++){
+            Debug.Log(allItems[x].name);
+            Debug.Log(allItems[x].GetComponentInChildren<ItemPickable>().itemScriptableObject.item_type);
+            Debug.Log(allItems[x].name);
             itemSetActive.Add(allItems[x].GetComponentInChildren<ItemPickable>().itemScriptableObject.item_type, allItems[x]);
         }
         
@@ -85,10 +121,13 @@ public class PlayerInventory : MonoBehaviour
                     ItemPickable itemInfo = hitInfo.collider.GetComponent<ItemPickable>();
                     if (item != null)
                     {
-                        inventoryList.Add(itemInfo.itemScriptableObject.item_type);
-                        // server.addItem(itemInfo.itemScriptableObject.id);
+                        //inventoryList.Add(itemInfo.itemScriptableObject.item_type);
+                        server.addItem(itemInfo.itemScriptableObject.id);
 
                         item.PickItem();
+                        Debug.Log("got here");
+                     
+
                         UpdateInventoryUI();
                     }
                 }
@@ -100,28 +139,32 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    //i couldn't think of a better way so i brute forced it
+    
     void WorldItemInteractions(string worldItemName)
     {
         //Blue Wall interactions
         if (currentItemName == "Fruit" && worldItemName == "Mortar")
         {
-            Debug.Log("mash");
-            currentItem.GetComponent<Image>().sprite = mash;
+            server.addItem(9);
+            server.removeItem(4);
+            currentItemName = null;
         }
-        if (currentItemName == "Fermented Mash" && worldItemName == "Distillery")
+        if (currentItemName == "Fermented" && worldItemName == "Distillery")
         {
-            Debug.Log("jar");
-            currentItem.GetComponent<Image>().sprite = emptyJar;
+            server.addItem(11);
+            server.removeItem(10);
             makeAlcohol = true;
             makeCrystals = false;
+            currentItemName = null;
         }
         if (currentItemName == "Mixed Solution" && worldItemName == "Distillery")
         {
             Debug.Log("bottle");
-            currentItem.GetComponent<Image>().sprite = emptyBottle;
-            makeCrystals = true;
-            makeAlcohol = false;
+             server.addItem(11);
+             server.removeItem(14);
+             makeCrystals = true;
+             makeAlcohol = false;
+            currentItemName = null;
         }
         if (currentItemName == "Fire" && worldItemName == "Distillery")
         {
@@ -129,31 +172,25 @@ public class PlayerInventory : MonoBehaviour
             if(makeAlcohol == true)
             {
                 Debug.Log("alcohol");
-                foreach (Transform child in itemSpritesParent.transform)
-                {
-                    if (child.GetComponent<Image>().sprite == emptyJar)
-                    {
-                        child.GetComponent<Image>().sprite = alcohol;
-                    }
-                }
+                server.addItem(12);
+                server.removeItem(11);
                 makeAlcohol = false;
+                currentItemName = null;
             }
             else if (makeCrystals == true)
             {
                 Debug.Log("crystals");
-                foreach (Transform child in itemSpritesParent.transform)
-                {
-                    if (child.GetComponent<Image>().sprite == emptyBottle)
-                    {
-                        child.GetComponent<Image>().sprite = crystals;
-                    }
-                }
+                server.addItem(15);
                 makeCrystals = false;
+                currentItemName = null;
             }
         }
         if (currentItemName == "Alcohol" && worldItemName == "Blue")
         {
             Debug.Log("blue flame lighting");
+
+             fire.GetComponent<MeshRenderer> ().material = blue;
+             server.winBlue();
             //code for lighting flame
         }
 
@@ -162,15 +199,18 @@ public class PlayerInventory : MonoBehaviour
         if (currentItemName == "Key" && worldItemName == "Chest")
         {
             Debug.Log("powder falls on ground");
-            selectedItem = 0;
-            currentItem.gameObject.SetActive(false);
-            Instantiate(powder, powderSpawn);
+            currentItemName = null;
+            //Instantiate(powder, powderSpawn);
+            server.addItem(5);
+            server.removeItem(1);
         }
         if (currentItemName == "Crystals" && worldItemName == "Green")
         {
-            Debug.Log("green flame lighting");
+             rightFire.GetComponent<MeshRenderer> ().material = green;
+             server.winGreen();
             //code for lighting flame
         }
+        UpdateInventoryUI();
     }
 
     void CombineItems()
@@ -179,66 +219,44 @@ public class PlayerInventory : MonoBehaviour
         if (currentItemName == "Mash" && lastItemName == "Time" || currentItemName == "Time" && lastItemName == "Mash")
         {
             Debug.Log("fermented mash");
-            SpawnPhoenixAsh();
-            if (currentItemName == "Mash")
-            {
-                currentItem.GetComponent<Image>().sprite = fermentedMash;
-            }
-            else if (currentItemName == "Time")
-            {
-                lastItem.GetComponent<Image>().sprite = fermentedMash;
-            }
+            server.removeItem(9);
+            server.addItem(10);
+            Debug.Log("kill phoenix");
+
+            server.killPhoenix();
+            
+
         }
 
         //Green Wall combinations
         if (currentItemName == "Vinegar" && lastItemName == "Powder" || currentItemName == "Powder" && lastItemName == "Vinegar")
         {
+            server.removeItem(0);
+            server.removeItem(5);
+            server.addItem(7);
             Debug.Log("vinegar solution");
-            if(currentItemName == "Vinegar")
-            {
-                currentItem.GetComponent<Image>().sprite = vinegarSolution;
-                //destroy last item
-                lastItem.gameObject.SetActive(false);
-            }
-            else if (currentItemName == "Powder")
-            {
-                lastItem.GetComponent<Image>().sprite = vinegarSolution;
-                //destroy current item
-                currentItem.gameObject.SetActive(false);
-            }
+
         }
         if (currentItemName == "Vinegar Solution" && lastItemName == "Time" || currentItemName == "Time" && lastItemName == "Vinegar Solution")
         {
             Debug.Log("evaporated solution");
-            SpawnPhoenixAsh();
-            if (currentItemName == "Vinegar Solution")
-            {
-                currentItem.GetComponent<Image>().sprite = evaporatedSolution;
-            }
-            if (currentItemName == "Time")
-            {
-                lastItem.GetComponent<Image>().sprite = evaporatedSolution;
-            }
+            server.killPhoenix();
+            server.removeItem(7);
+            server.addItem(13);
+            //remove solution add evaporated
         }
         if (currentItemName == "Evaporated Solution" && lastItemName == "Ash" || currentItemName == "Ash" && lastItemName == "Evaporated Solution")
         {
             Debug.Log("mixed solution");
-            if (currentItemName == "Evaporated Solution")
-            {
-                currentItem.GetComponent<Image>().sprite = mixedSolution;
-                //destroy last item
-                lastItem.gameObject.SetActive(false);
-            }
-            if (currentItemName == "Ash")
-            {
-                lastItem.GetComponent<Image>().sprite = mixedSolution;
-                //destroy current item
-                currentItem.gameObject.SetActive(false);
-            }
+            server.removeItem(6);
+            server.removeItem(13);
+            server.addItem(14);
+
+            //remove evaporated add mixed
         }
     }
 
-    void SpawnPhoenixAsh()
+    public void SpawnPhoenixAsh()
     {
         if (phoenixDead == false)
         {
@@ -249,23 +267,50 @@ public class PlayerInventory : MonoBehaviour
 
     public void SlotClicked()
     {
+        Debug.Log("clicked");
         lastItem = currentItem;
         lastItemName = currentItemName;
         selectedItem = int.Parse(EventSystem.current.currentSelectedGameObject.name);
+        
         UpdateInventoryUI();
-
         currentItem = EventSystem.current.currentSelectedGameObject;
+        Debug.Log(currentItem.GetComponent<Image>().sprite.name);
+
         currentItemName = currentItem.GetComponent<Image>().sprite.name;
         CombineItems();
+
+        //display item info
+        if(currentItem == lastItem)
+        {
+            itemInfoUI.gameObject.SetActive(true);
+            //itemInfoUI.anchoredPosition = EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>().anchoredPosition;
+            itemNameText.text = currentItemName;
+            for (int x = 0; x < itemList.Length; x++)
+            {
+                if (itemList[x].GetComponentInChildren<ItemPickable>().itemScriptableObject.item_sprite.name == currentItemName)
+                {
+                    itemDescriptionText.text = itemList[x].GetComponentInChildren<ItemPickable>().itemScriptableObject.item_description;
+                }
+            }
+        }
+        else if (currentItem != lastItem)
+        {
+            itemInfoUI.gameObject.SetActive(false);
+        }
+    }
+
+    public void CloseInfoButton()
+    {
+        itemInfoUI.gameObject.SetActive(false);
     }
 
     ItemPickable FindItem(int id)
     {
         for (int x = 0; x < itemList.Length; x++)
         {
-            if (itemList[x].GetComponent<ItemPickable>().itemScriptableObject.id == id)
+            if (itemList[x].GetComponentInChildren<ItemPickable>().itemScriptableObject.id == id)
             {
-                return itemList[x].GetComponent<ItemPickable>();
+                return itemList[x].GetComponentInChildren<ItemPickable>();
             }
         }
         return null;
@@ -273,26 +318,33 @@ public class PlayerInventory : MonoBehaviour
 
     public void UpdateInventoryUI()
     {
+        
         //.Log("inv"+inventoryList.Count);
         for (int i = 0; i < itemSprites.Count; i++)
         {
-            if (i < inventoryList.Count && itemSprites[i].sprite == null)
+            Debug.Log("updated" + updatedCount);
+            if (i < updatedCount && itemSprites[i].sprite == null)
             {
+                Debug.Log("first" +itemSetActive.Count + itemSetActive[inventoryList[i]]);
                 itemSprites[i].sprite = itemSetActive[inventoryList[i]].GetComponentInChildren<ItemPickable>().itemScriptableObject.item_sprite;
                 itemSprites[i].enabled = true;
             }
-            else if (i < inventoryList.Count && itemSprites[i].sprite != null)
+            else if (i < updatedCount && itemSprites[i].sprite != null)
             {
+                Debug.Log("second");
+
                 itemSprites[i].enabled = true;
             }
             else
             {
-                itemSprites[i].sprite = emptySlotSprite;
+                Debug.Log("third "+updatedCount);
+
+                itemSprites[i].sprite = null;
                 itemSprites[i].enabled = false;
             }
         }
 
-        if (inventoryList.Count > 0)
+        if (updatedCount > 0)
         {
             int a = 0;
             foreach (Image image in itemSelectedIndicators)
@@ -308,28 +360,43 @@ public class PlayerInventory : MonoBehaviour
                 a++;
             }
         }
+         Debug.Log("Count"+actionQueue.Count);
+        if(actionQueue.Count>0){
+                    Debug.Log("invoking");
+
+        actionQueue.Dequeue().Invoke();
+        }
     }
 
-        public void UpdateInventoryUI(string[] items)
+public void UpdateInventoryUI(string[] items)
     {
+        inventoryList = new List<itemType>();
+        for(int x = 0; x<items.Length; x++){
+           Debug.Log("Found item" + items.Length+ items[x]);
+
+            inventoryList.Add(FindItem(int.Parse(items[x])).itemScriptableObject.item_type);
+
+        }
+        updatedCount = items.Length;
         //.Log("inv"+inventoryList.Count);
-        for (int i = 0; i < items.Length; i++)
+        for (int i = 0; i < 10; i++)
         {
-            Debug.Log("test");
+            Debug.Log("test" + items.Length);
             if (i < items.Length)
             {
-                Debug.Log("got inside"+items.Length);
+                Debug.Log(i+"got inside"+items.Length);
                 itemSprites[i].sprite = FindItem(int.Parse(items[i])).itemScriptableObject.item_sprite;
                 itemSprites[i].enabled = true;
             }
             else
             {
-                itemSprites[i].sprite = emptySlotSprite;
+                Debug.Log("null");
+                itemSprites[i].sprite = null;
                 itemSprites[i].enabled = false;
             }
         }
 
-        if (inventoryList.Count > 0)
+        if (updatedCount > 0)
         {
             int a = 0;
             foreach (Image image in itemSelectedIndicators)
@@ -345,7 +412,13 @@ public class PlayerInventory : MonoBehaviour
                 a++;
             }
         }
+        Debug.Log("CountServer"+actionQueue.Count);
+                if(actionQueue.Count>0){
+                    Debug.Log("invoking server");
+        actionQueue.Dequeue().Invoke();
+       }
     }
+    
 }
 
 

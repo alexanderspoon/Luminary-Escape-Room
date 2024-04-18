@@ -9,10 +9,14 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb; //2D rigidbody on player
     private Vector3 mousePos; //Vector3 of where the mouse was clicked on screen
     private Vector3 mouseDir; //Vector3 of the direction from the player to the mouse
+    public GameObject ts;
+    public GameObject fs;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>(); //set the rigidbody
+
+
     }
 
     void Update()

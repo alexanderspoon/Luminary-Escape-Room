@@ -13,6 +13,24 @@ public class ItemScriptableObject : ScriptableObject
     public itemType item_type;
     public Sprite item_sprite;
     public int id;
+    public string item_description;
 }
 
-public enum itemType {Vinegar,Key,FireScroll,TimeScroll,FruitJar,CopperPowder,PhoenixAsh}
+public enum itemType {
+    Vinegar,
+    Key,
+    FireScroll,
+    TimeScroll,
+    FruitJar,
+    CopperPowder,
+    PhoenixAsh,
+    VinegarSolution,
+    Powder,
+    MashedFruit,
+    FermentedFruit,
+    EmptyJar, 
+    Alcohol, 
+    EvaporatedSolution, 
+    MixedSolution,
+    Crystals
+}
