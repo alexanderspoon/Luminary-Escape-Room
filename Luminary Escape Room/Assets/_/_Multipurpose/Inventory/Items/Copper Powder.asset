@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Copper Powder
   m_EditorClassIdentifier: 
   item_type: 5
-  item_sprite: {fileID: 21300000, guid: 6c018a40ade0aef41be800f27788bd84, type: 3}
+  item_sprite: {fileID: 21300000, guid: 63b5e3964c404be4c9580f15b4f346c1, type: 3}
   id: 5
   item_description: copper powder item description
