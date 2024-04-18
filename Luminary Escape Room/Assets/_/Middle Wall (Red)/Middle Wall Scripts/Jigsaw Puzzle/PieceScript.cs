@@ -14,7 +14,7 @@ public class PieceScript : MonoBehaviour
     private float startTime;
     private float journeyLength;
     private Vector3 startPos;
-    public float pieceSpeed = 2f;
+    public float pieceSpeed = 4f;
 
     // Start is called before the first frame update
     void Start()
