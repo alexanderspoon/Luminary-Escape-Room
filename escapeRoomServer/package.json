@@ -1,0 +1,15 @@
+{
+  "name": "escaperoomserver",
+  "version": "1.0.0",
+  "description": "Server to connect multiple screens together in the luminary",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Taylor Hall",
+  "license": "ISC",
+  "dependencies": {
+    "ws": "^8.14.2"
+  }
+}
