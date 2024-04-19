@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: VinegarSolutionEvaporated
   m_EditorClassIdentifier: 
   item_type: 13
-  item_sprite: {fileID: 21300000, guid: 524cb493e5fd3cc4684992a5aa153c88, type: 3}
+  item_sprite: {fileID: 21300000, guid: 08e5b119cc5fb9b46b4e431d3656fb86, type: 3}
   id: 13
   item_description: evaporated solution item description
