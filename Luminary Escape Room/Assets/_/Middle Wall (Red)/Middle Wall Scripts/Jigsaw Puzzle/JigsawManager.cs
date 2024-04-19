@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class JigsawManager : MonoBehaviour
 {
+    //Audio for Witch
+    public AudioSource middleScreenAudio;
+    public AudioClip witchIntro;
+    public AudioClip fireScroll;
+
     public static int slotsFilled;
     [SerializeField] private GameObject frame;
     [SerializeField] private GameObject pieces;
@@ -14,6 +19,10 @@ public class JigsawManager : MonoBehaviour
         frame.SetActive(true);
         pieces.SetActive(true);
         scroll.SetActive(false);
+
+        //start witch intro
+        middleScreenAudio.clip = witchIntro;
+        middleScreenAudio.Play();
     }
 
     void Update()
@@ -26,6 +35,10 @@ public class JigsawManager : MonoBehaviour
             frame.SetActive(false);
             pieces.SetActive(false);
             scroll.SetActive(true);
+
+            //play fire scroll audio
+            middleScreenAudio.clip = fireScroll;
+            middleScreenAudio.Play();
         }
     }
 }

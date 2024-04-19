@@ -3,6 +3,7 @@ using WebSocketSharp;
 using TMPro;
 using System;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class SocketWork : MonoBehaviour
 {
@@ -11,8 +12,14 @@ public class SocketWork : MonoBehaviour
     string number;
 
         private static SocketWork instance;
+        private static SocketWork inventoryQueue;
+
+    public GameObject winCanvas;
 
     private readonly Queue<Action> actionQueue = new Queue<Action>();
+
+    public bool blue;
+    public bool green;
 
     [SerializeField]
     PlayerInventory inventory;
@@ -24,7 +31,8 @@ public class SocketWork : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
-        ws = new WebSocket("ws://10.255.243.246:3000");
+        ws = new WebSocket("ws://10.31.11.138:3000");
+        
         ws.Connect();
         ws.OnMessage += (sender, e) =>
         {
@@ -73,9 +81,29 @@ public class SocketWork : MonoBehaviour
 
                     break;
 
+                case "kill":
+                        Debug.Log("kill phoenix");
+                                        SocketWork.Enqueue(() => {
+                            // Enable or modify TextMeshProUGUI here
+                             inventory.SpawnPhoenixAsh();
+                        });
+                 
+                    
+
+                    break;
+
+                case "win":
+                                        SocketWork.Enqueue(() => {
+                            // Enable or modify TextMeshProUGUI here
+                             winCanvas.SetActive(true);
+                        });
+                 
+                    
+
+                    break;
                 case "intro":
                 SocketWork.Enqueue(() => {
-                    Debug.Log("GotIntroRequest");
+                    //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                 });
                 break;
 
@@ -90,7 +118,26 @@ public class SocketWork : MonoBehaviour
     }
 
     public void addItem(int id){
+        
         ws.Send("{\"type\":\"add\",\"added\":\""+id+"\"}");
+    }
+
+        public void killPhoenix(){
+            Debug.Log("kill phoenix");
+        ws.Send("{\"type\":\"kill\",\"added\":\"0\"}");
+    }
+
+    public void removeItem(int id){
+        ws.Send("{\"type\":\"remove\",\"added\":\""+id+"\"}");
+    }
+
+    public void winBlue(){
+        ws.Send("{\"type\":\"blue\",\"added\":\"0\"}");
+        blue = true;
+    }
+    public void winGreen(){
+        ws.Send("{\"type\":\"green\",\"added\":\"0\"}");
+        green = true;
     }
 
     public void StartIntro() 

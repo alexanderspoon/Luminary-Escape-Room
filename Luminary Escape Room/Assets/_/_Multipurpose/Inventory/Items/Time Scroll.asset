@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Time Scroll
   m_EditorClassIdentifier: 
   item_type: 3
-  item_sprite: {fileID: 21300000, guid: 1137ded14669e0b48b0ee1533283cc34, type: 3}
+  item_sprite: {fileID: 21300000, guid: 65ee3989b060b564ba1a258ffb50b8dd, type: 3}
   id: 3
+  item_description: time scroll item description
