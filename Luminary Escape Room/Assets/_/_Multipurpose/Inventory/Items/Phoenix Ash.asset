@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Phoenix Ash
   m_EditorClassIdentifier: 
   item_type: 6
-  item_sprite: {fileID: 21300000, guid: 9363350662bed4146b9862833b7c7f01, type: 3}
+  item_sprite: {fileID: 21300000, guid: e9ba7e86d5fcef3499871c513288cebc, type: 3}
   id: 6
   item_description: phoenix ash item description
