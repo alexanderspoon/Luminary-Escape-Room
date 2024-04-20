@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: VinegarSolution
   m_EditorClassIdentifier: 
   item_type: 7
-  item_sprite: {fileID: 21300000, guid: 0c6c389e5b1b37743b5f26cba4fa5ec6, type: 3}
+  item_sprite: {fileID: 21300000, guid: cc931fd7f284f76458050d6a12900bc4, type: 3}
   id: 7
   item_description: vinegar solution item description
