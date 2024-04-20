@@ -6613,6 +6613,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   number: 3
   winCanvas: {fileID: 0}
+  blue: 0
+  green: 0
   inventory: {fileID: 331348046}
 --- !u!4 &1645733399
 Transform:
