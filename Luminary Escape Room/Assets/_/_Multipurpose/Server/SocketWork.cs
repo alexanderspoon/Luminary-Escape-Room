@@ -17,6 +17,9 @@ public class SocketWork : MonoBehaviour
 
     private readonly Queue<Action> actionQueue = new Queue<Action>();
 
+    public bool blue;
+    public bool green;
+
     [SerializeField]
     PlayerInventory inventory;
     private void Start()
@@ -129,9 +132,11 @@ public class SocketWork : MonoBehaviour
 
     public void winBlue(){
         ws.Send("{\"type\":\"blue\",\"added\":\"0\"}");
+        blue = true;
     }
     public void winGreen(){
         ws.Send("{\"type\":\"green\",\"added\":\"0\"}");
+        green = true;
     }
 
     public void StartIntro() 

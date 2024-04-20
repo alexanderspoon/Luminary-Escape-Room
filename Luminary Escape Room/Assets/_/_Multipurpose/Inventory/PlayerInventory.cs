@@ -139,7 +139,7 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    //i couldn't think of a better way so i brute forced it
+    
     void WorldItemInteractions(string worldItemName)
     {
         //Blue Wall interactions
@@ -149,7 +149,7 @@ public class PlayerInventory : MonoBehaviour
             server.removeItem(4);
             currentItemName = null;
         }
-        if (currentItemName == "Fermented" && worldItemName == "Distillery")
+        if (currentItemName == "Fermented" && worldItemName == "Distillery" && !makeCrystals)
         {
             server.addItem(11);
             server.removeItem(10);
@@ -157,7 +157,7 @@ public class PlayerInventory : MonoBehaviour
             makeCrystals = false;
             currentItemName = null;
         }
-        if (currentItemName == "Mixed Solution" && worldItemName == "Distillery")
+        if (currentItemName == "Mixed Solution" && worldItemName == "Distillery" && !makeAlcohol)
         {
             Debug.Log("bottle");
              server.addItem(11);
