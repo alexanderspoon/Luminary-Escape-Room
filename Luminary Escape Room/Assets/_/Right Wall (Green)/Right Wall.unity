@@ -1202,6 +1202,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1375525200624969952, guid: 8386e050a8212704cac12e3d0f29dd85, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1375525200624969952, guid: 8386e050a8212704cac12e3d0f29dd85, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1375525200624969952, guid: 8386e050a8212704cac12e3d0f29dd85, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 2180231165798468763, guid: 8386e050a8212704cac12e3d0f29dd85, type: 3}
       propertyPath: m_Camera
       value: 
