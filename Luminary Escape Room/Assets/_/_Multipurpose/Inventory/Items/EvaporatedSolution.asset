@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: EvaporatedSolution
   m_EditorClassIdentifier: 
   item_type: 13
-  item_sprite: {fileID: 21300000, guid: 08e5b119cc5fb9b46b4e431d3656fb86, type: 3}
+  item_sprite: {fileID: 21300000, guid: ab4478ef2f3c50b4095ccf276d54ef82, type: 3}
   id: 13
   item_description: evaporated solution item description

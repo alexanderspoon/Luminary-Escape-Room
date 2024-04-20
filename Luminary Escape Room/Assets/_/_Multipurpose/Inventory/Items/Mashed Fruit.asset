@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Mashed Fruit
   m_EditorClassIdentifier: 
   item_type: 9
-  item_sprite: {fileID: 21300000, guid: 5e27f04dd017478409994ecd4e2a990d, type: 3}
+  item_sprite: {fileID: 21300000, guid: 31c29a021de79be4e8ca5cff1d313875, type: 3}
   id: 9
   item_description: mashed fruit item description

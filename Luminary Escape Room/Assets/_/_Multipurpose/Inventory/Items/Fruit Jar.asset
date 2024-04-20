@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Fruit Jar
   m_EditorClassIdentifier: 
   item_type: 4
-  item_sprite: {fileID: 21300000, guid: 6224e35dbb698bc4089c9f9547ab0d84, type: 3}
+  item_sprite: {fileID: 21300000, guid: b329aff36b37627499b21c6d70ece729, type: 3}
   id: 4
   item_description: fruit jar item description
